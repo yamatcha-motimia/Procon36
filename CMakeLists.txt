@@ -17,10 +17,24 @@ find_package(glfw3 CONFIG REQUIRED)
 
 add_executable(run src/main.cpp)
 
+# ライブラリ名に対応するターゲット名を指定
+target_include_directories(run PRIVATE
+    # vcpkgが提供するGLFWのパス（多くの場合、ヘッダーは"GLFW"というサブフォルダにあります）
+    glfw3
+    # ImGui本体のヘッダーパス
+    imgui::imgui
+    # ImGuiのバインディング（実装）ファイルのヘッダーパス
+    # vcpkgのImGuiポートは、多くの場合、このヘッダーパスもimgui::imguiターゲットに含めるが、
+    # 含まれていない場合は明示的に追加が必要。
+    # ここでは、imgui::glfw-bindingのターゲット名に対応するINCLUDE_DIRSを要求します
+    $<TARGET_PROPERTY:imgui::glfw-binding,INTERFACE_INCLUDE_DIRECTORIES>
+    $<TARGET_PROPERTY:imgui::opengl3-binding,INTERFACE_INCLUDE_DIRECTORIES>
+)
+
 # 実行可能ファイルに必要なライブラリをリンク
 target_link_libraries(run PRIVATE
-    imgui::imgui
-    imgui-glfw
-    imgui-opengl3
-    glfw3
+    imgui                 # ImGui本体
+    imgui-glfw            # GLFWバインディング
+    imgui-opengl3         # OpenGL3バインディング (GLAD込み)
+    glfw3                 # GLFW本体
 )
