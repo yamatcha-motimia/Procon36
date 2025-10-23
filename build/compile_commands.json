@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/home/yamatcha_game_dev/Procon/Procon36/build",
-  "command": "/usr/bin/g++  -isystem /home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/include -g -std=gnu++17 -o CMakeFiles/run.dir/src/main.cpp.o -c /home/yamatcha_game_dev/Procon/Procon36/src/main.cpp",
-  "file": "/home/yamatcha_game_dev/Procon/Procon36/src/main.cpp",
-  "output": "CMakeFiles/run.dir/src/main.cpp.o"
-}
-]

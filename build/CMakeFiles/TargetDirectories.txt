@@ -1,3 +1,0 @@
-/home/yamatcha_game_dev/Procon/Procon36/build/CMakeFiles/run.dir
-/home/yamatcha_game_dev/Procon/Procon36/build/CMakeFiles/edit_cache.dir
-/home/yamatcha_game_dev/Procon/Procon36/build/CMakeFiles/rebuild_cache.dir

@@ -20,7 +20,7 @@ add_executable(run src/main.cpp)
 # 実行可能ファイルに必要なライブラリをリンク
 target_link_libraries(run PRIVATE
     imgui::imgui
-    imgui::glfw-binding
-    imgui::opengl3-binding
+    imgui-glfw
+    imgui-opengl3
     glfw3
 )

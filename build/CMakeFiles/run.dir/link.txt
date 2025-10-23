@@ -1,1 +1,0 @@
-/usr/bin/g++ -g CMakeFiles/run.dir/src/main.cpp.o -o run  /home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/debug/lib/libimguid.a -limgui::glfw-binding -limgui::opengl3-binding -lglfw3 /home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/debug/lib/libglfw3.a /usr/lib/x86_64-linux-gnu/librt.a -lm -ldl 
