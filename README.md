@@ -5,7 +5,5 @@
 その他: C++学習, git演習, デバッグGUIの作成等
 
 ## CMakeLists.txtコンパイル
-
 ```bash
-cmake
 ```
