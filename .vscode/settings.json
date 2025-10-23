@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        "**/.git": true,         // Gitの管理フォルダ（履歴など）を非表示
+        "**/.svn": true,         // Subversionの管理フォルダを非表示
+        "**/.hg": true,          // Mercurialの管理フォルダを非表示
+        "**/.DS_Store": true,    // macOSが自動生成するファイルを非表示
+        "**/Thumbs.db": true,    // Windowsが自動生成する画像プレビュー用ファイルを非表示
+        "**/*.exe": true,        // Windows用の実行ファイル（.exe）を非表示
+        "**/*.out": true,        // Linuxでよく使われる実行ファイル（.out）を非表示
+    }
+}
