@@ -1,1 +1,16 @@
+# ビルド生成物 (既に記述済み)
 /build/
+
+# ホームディレクトリにあるから問題なし
+# vcpkg関連ファイル
+/vcpkg/
+# vcpkgがライブラリをインストールした場所
+/installed/
+
+# VS Codeのローカル設定ファイル
+.vscode/settings.json
+
+# その他
+*.o
+*.a
+*.so

@@ -15,26 +15,23 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 find_package(imgui CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 
+# リンカーにvcpkgのlibディレクトリのパスを教える
+#link_directories("/home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/lib")
+
 add_executable(run src/main.cpp)
 
 # ライブラリ名に対応するターゲット名を指定
+# /home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/includeを直接指定
 target_include_directories(run PRIVATE
-    # vcpkgが提供するGLFWのパス（多くの場合、ヘッダーは"GLFW"というサブフォルダにあります）
-    glfw3
-    # ImGui本体のヘッダーパス
-    imgui::imgui
-    # ImGuiのバインディング（実装）ファイルのヘッダーパス
-    # vcpkgのImGuiポートは、多くの場合、このヘッダーパスもimgui::imguiターゲットに含めるが、
-    # 含まれていない場合は明示的に追加が必要。
-    # ここでは、imgui::glfw-bindingのターゲット名に対応するINCLUDE_DIRSを要求します
-    $<TARGET_PROPERTY:imgui::glfw-binding,INTERFACE_INCLUDE_DIRECTORIES>
-    $<TARGET_PROPERTY:imgui::opengl3-binding,INTERFACE_INCLUDE_DIRECTORIES>
+    "/home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/include"
 )
 
 # 実行可能ファイルに必要なライブラリをリンク
+# vcpkgが生成したライブラリファイルへの絶対パスを直接指定
+set(VCPKG_LIB_DIR "/home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/lib")
+
 target_link_libraries(run PRIVATE
-    imgui                 # ImGui本体
-    imgui-glfw            # GLFWバインディング
-    imgui-opengl3         # OpenGL3バインディング (GLAD込み)
-    glfw3                 # GLFW本体
+    "${VCPKG_LIB_DIR}/libimgui.a"  # ImGui本体
+    "${VCPKG_LIB_DIR}/libglfw3.a"  # GLFW本体
+    pthread GL dl X11              # Linuxで必要なシステムライブラリ
 )

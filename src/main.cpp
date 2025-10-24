@@ -29,7 +29,7 @@ int main(int, char**)
     if (window == NULL)
         return 1;
     glfwMakeContextCurrent(window);
-    glfwSwapInterval(1); // VSyncを有効に
+    glfwSwapInterval(0); // VSyncを無効に（ラグ軽減）
 
     // 4. ImGuiコンテキストの初期化
     IMGUI_CHECKVERSION();
