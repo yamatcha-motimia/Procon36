@@ -1,6 +1,6 @@
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
+#include "imgui.h" // ImGui のコア機能
+#include "imgui_impl_glfw.h" // ImGuiとGLFW（ウィンドウ）の連携コード
+#include "imgui_impl_opengl3.h" // ImGuiとOpenGL（描画API）の連携コード
 #include <stdio.h>
 #include <GLFW/glfw3.h> // GLFWのヘッダ
 
@@ -14,8 +14,7 @@ int main(int, char**)
 {
     // 1. GLFWの初期化
     glfwSetErrorCallback(glfw_error_callback);
-    if (!glfwInit())
-        return 1;
+    if (!glfwInit()) { return 1; }
 
     // 2. OpenGLとGLFWのバージョン指定
     // OpenGL 3.3 Core Profileを使用
@@ -26,8 +25,7 @@ int main(int, char**)
 
     // 3. ウィンドウの作成
     GLFWwindow* window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 Example", NULL, NULL);
-    if (window == NULL)
-        return 1;
+    if (window == NULL) { return 1; }
     glfwMakeContextCurrent(window);
     glfwSwapInterval(0); // VSyncを無効に（ラグ軽減）
 
@@ -44,18 +42,18 @@ int main(int, char**)
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     // デモウィンドウの表示フラグ
-    bool show_demo_window = true;
+    bool show_demo_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     // 7. メインループ
     while (!glfwWindowShouldClose(window))
     {
-        glfwPollEvents();
+        glfwPollEvents(); // OSからのキー入力やマウスイベントを処理
 
         // ImGuiフレームの開始
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        ImGui::NewFrame(); // ImGuiの描画開始宣言
 
         // === 8. ImGui GUIのロジックをここに記述 ===
 
@@ -65,9 +63,12 @@ int main(int, char**)
 
         // (B) 独自のウィンドウの作成
         {
+            // ウィンドウの初期設定
+            ImGui::SetNextWindowPos(ImVec2(100, 100), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(300, 200), ImGuiCond_Always);
             static float f = 0.0f;
-            ImGui::Begin("Hello, ImGui!"); // ウィンドウの開始
-            ImGui::Text("これは私の最初のImGuiウィンドウです！");
+            ImGui::Begin("Hello, ImGui!", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysAutoResize); // ウィンドウの開始
+            ImGui::Text("This is my first ImGui window!");
             ImGui::SliderFloat("float", &f, 0.0f, 1.0f); // スライダー
             if (ImGui::Button("Button")) // ボタン
             {
@@ -77,7 +78,7 @@ int main(int, char**)
         }
 
         // 9. レンダリング
-        ImGui::Render();
+        ImGui::Render(); // 描画ロジックを内部データに変換
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
@@ -89,7 +90,7 @@ int main(int, char**)
         // ImGuiの描画データでレンダリング
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(window); // 実際に画面に描画
     }
 
     // 10. クリーンアップ
