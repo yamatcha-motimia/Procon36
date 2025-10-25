@@ -15,13 +15,9 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 find_package(imgui CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 
-# リンカーにvcpkgのlibディレクトリのパスを教える
-#link_directories("/home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/lib")
-
 add_executable(run src/main.cpp)
 
 # ライブラリ名に対応するターゲット名を指定
-# /home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/includeを直接指定
 target_include_directories(run PRIVATE
     "/home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/include"
 )
