@@ -1,15 +1,8 @@
 # ===== 初期設定 =====
-# CMake 最低バージョンを指定
-cmake_minimum_required(VERSION 3.20)
-
-# プロジェクト名と使用言語を指定
-project(Procon36App CXX)
-
-# C++ バージョン指定
-set(CMAKE_CXX_STANDARD 17)
+cmake_minimum_required(VERSION 3.20)  # CMake 最低バージョンを指定
+project(Procon36App CXX)              # プロジェクト名と使用言語を指定
+set(CMAKE_CXX_STANDARD 17)            # C++ バージョン指定
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# C++ 最適化フラグ
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 
 # ===== 外部ライブラリ設定 =====
@@ -17,16 +10,13 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 find_package(imgui CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 
-# --- Google Benchmark 設定 ---
-# 修正点: ベンチマーク自身のテストを無効化
+# Google Benchmark: ベンチマーク自身のテストを無効化
 set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable internal benchmark tests")
-add_subdirectory(vendor/benchmark)  # Google Benchmark をプロジェクトに組み込む
-# -----------------------------
 
+add_subdirectory(vendor/benchmark)
 add_subdirectory(vendor/spdlog)
 
 # ===== 実行ファイルの詳細設定 =====
-# 実行ファイルの作成
 add_executable(run src/main.cpp)
 
 # インクルードディレクトリ追加
