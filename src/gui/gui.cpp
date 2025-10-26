@@ -1,8 +1,8 @@
-#include "imgui.h" // ImGui のコア機能
-#include "imgui_impl_glfw.h" // ImGuiとGLFW（ウィンドウ）の連携コード
+#include "imgui.h"              // ImGui のコア機能
+#include "imgui_impl_glfw.h"    // ImGuiとGLFW（ウィンドウ）の連携コード
 #include "imgui_impl_opengl3.h" // ImGuiとOpenGL（描画API）の連携コード
 #include <stdio.h>
-#include <GLFW/glfw3.h> // GLFWのヘッダ
+#include <GLFW/glfw3.h>         // GLFWのヘッダ
 
 // エラーコールバック関数 (省略可能)
 static void glfw_error_callback(int error, const char* description)

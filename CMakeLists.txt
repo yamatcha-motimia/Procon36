@@ -1,11 +1,11 @@
-# ===== 初期設定 =====
+# === 初期設定 ===
 cmake_minimum_required(VERSION 3.20)  # CMake 最低バージョンを指定
 project(Procon36App CXX)              # プロジェクト名と使用言語を指定
 set(CMAKE_CXX_STANDARD 17)            # C++ バージョン指定
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)   # C++ バージョン強制
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 
-# ===== 外部ライブラリ設定 =====
+# === 外部ライブラリ設定 ===
 # vcpkg でインストールしたパッケージの検索
 find_package(imgui CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
@@ -13,14 +13,16 @@ find_package(glfw3 CONFIG REQUIRED)
 # Google Benchmark: ベンチマーク自身のテストを無効化
 set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable internal benchmark tests")
 
+# 対象のCMakeLists.txtの読み込み
 add_subdirectory(vendor/benchmark)
 add_subdirectory(vendor/spdlog)
+add_subdirectory(src)
 
-# ===== 実行ファイルの詳細設定 =====
+
+# === 実行ファイルの詳細設定 ===
 add_executable(run src/main.cpp)
 
-# インクルードディレクトリ追加
-# imgui, nlohmann/json, spdlog
+# imgui, spdlog, nlohmann/json
 target_include_directories(run PRIVATE
     "/home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/include"
     #"${CMAKE_SOURCE_DIR}/vendor/json/single_include/"
@@ -31,15 +33,13 @@ target_include_directories(run PRIVATE
 set(VCPKG_LIB_DIR "/home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/lib")
 
 target_link_libraries(run PRIVATE
+    GUILib
     "${VCPKG_LIB_DIR}/libimgui.a"  # ImGui 本体
     "${VCPKG_LIB_DIR}/libglfw3.a"  # GLFW 本体
     pthread GL dl X11              # Linux で必要なシステムライブラリ
     # spdlog
 )
 
-# ===== テストとベンチマーク設定 =====
-# 実行可能なベンチマークターゲットを作成
+# === テストとベンチマーク設定 ===
 add_executable(run_benchmark test/benchmark.cpp)
-
-# ベンチマークターゲットに Benchmark ライブラリをリンク
 target_link_libraries(run_benchmark PRIVATE benchmark spdlog)
