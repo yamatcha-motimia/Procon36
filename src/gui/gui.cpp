@@ -7,8 +7,7 @@
 #include "imgui_impl_opengl3.h" // ImGuiとOpenGL（描画API）の連携コード
 
 // エラーコールバック関数 (省略可能)
-static void glfw_error_callback(int error, const char* description)
-{
+static void glfw_error_callback(int error, const char* description) {
     fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
