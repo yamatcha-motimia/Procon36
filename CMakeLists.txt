@@ -18,7 +18,6 @@ add_subdirectory(vendor/benchmark)
 add_subdirectory(vendor/spdlog)
 add_subdirectory(src)
 
-
 # === 実行ファイルの詳細設定 ===
 add_executable(run src/main.cpp)
 
