@@ -5,17 +5,19 @@
 #include "imgui.h"              // ImGui のコア機能
 #include "imgui_impl_glfw.h"    // ImGuiとGLFW（ウィンドウ）の連携コード
 #include "imgui_impl_opengl3.h" // ImGuiとOpenGL（描画API）の連携コード
+#include "common/namespace_macro.hpp"
 
-// エラーコールバック関数 (省略可能)
-static void glfw_error_callback(int error, const char* description) {
+BEGIN_SOLVER_NAMESPACE
+
+void glfw_error_callback(int error, const char* description) {
     fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
-int main(int, char**)
+void gui()
 {
     // 1. GLFWの初期化
     glfwSetErrorCallback(glfw_error_callback);
-    if (!glfwInit()) { return 1; }
+    if (!glfwInit()) return;
 
     // 2. OpenGLとGLFWのバージョン指定
     // OpenGL 3.3 Core Profileを使用
@@ -26,7 +28,7 @@ int main(int, char**)
 
     // 3. ウィンドウの作成
     GLFWwindow* window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 Example", NULL, NULL);
-    if (window == NULL) { return 1; }
+    if (window == NULL) return;
     glfwMakeContextCurrent(window);
     glfwSwapInterval(0); // VSyncを無効（ラグ軽減）
 
@@ -101,6 +103,6 @@ int main(int, char**)
 
     glfwDestroyWindow(window);
     glfwTerminate();
-
-    return 0;
 }
+
+END_SOLVER_NAMESPACE

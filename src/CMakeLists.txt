@@ -14,5 +14,5 @@ add_library(GUILib STATIC
 
 target_include_directories(GUILib PUBLIC
     "/home/yamatcha_game_dev/dev/vcpkg/installed/x64-linux/include"
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/
+    ${PROJECT_SOURCE_DIR}/include/
 )
